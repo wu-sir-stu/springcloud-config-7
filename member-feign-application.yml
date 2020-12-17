@@ -1,0 +1,27 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: member-feign
+  rabbitmq:
+    virtual-host: /
+    host: 192.168.175.67
+    port: 5672
+    username: guest
+    password: guest
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka #注册的协议地址访问名称
+hystrix:
+  command:
+    default:  #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          #如果enabled设置为false，则请求超时交给ribbon控制,为true,则超时作为熔断根据
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000 #断路器超时时间，默认1000ms
+members:
+  name: abc
